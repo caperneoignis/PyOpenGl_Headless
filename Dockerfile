@@ -1,7 +1,7 @@
 FROM python:3.7.6-slim as base
 
 ENV DEBIAN_FRONTEND=noninteractive
-
+ENV PYOPENGL_PLATFORM=osmesa
 RUN apt-get update && apt-get install -y curl
 
 # See http://bugs.python.org/issue19846
@@ -17,7 +17,7 @@ RUN git clone https://github.com/glfw/glfw.git /projects/glfw
 RUN cd /projects/glfw && cmake -DBUILD_SHARED_LIBS=ON . && make
 
 
-RUN export PYGLFW_LIBRARY=/projects/glfw/src/libglfw.so
+ENV PYGLFW_LIBRARY=/projects/glfw/src/libglfw.so
 
 RUN cd ~
 
@@ -41,4 +41,3 @@ RUN pip3 install tensorflow_cpu
 
 COPY bashrc /etc/bash.bashrc
 RUN chmod a+rwx /etc/bash.bashrc
-ENV PYOPENGL_PLATFORM=osmesa
