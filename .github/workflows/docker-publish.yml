@@ -23,7 +23,7 @@ env:
 
 
 jobs:
-  build:
+  build-publish:
 
     runs-on: ubuntu-latest
     permissions:
